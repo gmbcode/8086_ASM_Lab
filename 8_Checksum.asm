@@ -1,0 +1,18 @@
+.model small
+.data
+.code
+.startup
+MOV BX, 6000h
+MOV BYTE PTR [BX], 13h
+XOR AX,AX
+MOV AL,[BX]
+MOV BL,AL
+SHR BL,01
+MOV DL,AL
+MOV CL, 03h
+SHL DL,CL
+ADD AL,DL
+XOR AL,BL
+MOV [6001h],AL
+.exit
+end

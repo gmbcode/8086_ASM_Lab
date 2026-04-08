@@ -1,0 +1,37 @@
+.model small
+.data
+    STR db "TESTING 123$"
+    REVSTR db 12 DUP ('$')
+    StrLen db 0Bh     
+    NewL db 0Dh,0Ah,'$'  
+.code
+.startup
+MOV AX,DS
+MOV ES,AX
+LEA DI,REVSTR
+LEA SI,STR
+XOR AX,AX
+MOV AL,StrLen
+ADD SI,AX
+DEC SI
+MOV CX,AX
+L1:
+MOV AL,DS:[SI]
+MOV ES:[DI],AL
+DEC SI
+INC DI
+LOOP L1
+LEA DX,STR
+MOV AH,09h
+INT 21h
+
+LEA DX,NewL
+MOV AH,09h
+INT 21h
+
+LEA DX,REVSTR
+MOV AH,09h
+INT 21h
+
+.exit
+end
