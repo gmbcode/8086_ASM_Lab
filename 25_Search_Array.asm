@@ -1,0 +1,23 @@
+.model small
+.data
+    N DB 6h
+    ARRAY DB 10h,5h,20h,33h,11h,25h
+    KEY DB 25h
+    RESULT DB ?
+.code
+.startup
+MOV AX,DS
+MOV ES,AX
+LEA DI,ARRAY
+XOR CX,CX
+MOV CL,N
+MOV AL,KEY
+CLD 
+REPNE SCASB
+JNZ SKIP
+DEC DI
+MOV AL,BYTE PTR ES:[DI]
+MOV RESULT,AL
+SKIP:
+.exit
+end
